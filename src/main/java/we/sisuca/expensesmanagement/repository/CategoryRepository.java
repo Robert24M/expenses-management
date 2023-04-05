@@ -1,4 +1,4 @@
-package we.sisuca.expensesmanagement.repositories;
+package we.sisuca.expensesmanagement.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import we.sisuca.expensesmanagement.model.Category;

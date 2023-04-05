@@ -18,7 +18,7 @@ public class Expanse {
     private String description;
     private BigDecimal expanseValue;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne
     private Category category;
 
     public Long getId() {
