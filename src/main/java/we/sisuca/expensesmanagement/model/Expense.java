@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
-public class Expanse {
+public class Expense {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,9 +16,9 @@ public class Expanse {
 
     @Lob
     private String description;
-    private BigDecimal expanseValue;
+    private BigDecimal expenseValue;
 
-    @OneToOne
+    @ManyToOne
     private Category category;
 
     public Long getId() {
@@ -53,12 +53,12 @@ public class Expanse {
         this.description = description;
     }
 
-    public BigDecimal getExpanseValue() {
-        return expanseValue;
+    public BigDecimal getExpenseValue() {
+        return expenseValue;
     }
 
-    public void setExpanseValue(BigDecimal expanseValue) {
-        this.expanseValue = expanseValue;
+    public void setExpenseValue(BigDecimal expenseValue) {
+        this.expenseValue = expenseValue;
     }
 
     public Category getCategory() {

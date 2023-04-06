@@ -2,25 +2,25 @@ package we.sisuca.expensesmanagement.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import we.sisuca.expensesmanagement.model.Category;
-import we.sisuca.expensesmanagement.model.Expanse;
+import we.sisuca.expensesmanagement.model.Expense;
 import we.sisuca.expensesmanagement.service.CategoryService;
-import we.sisuca.expensesmanagement.service.ExpanseService;
+import we.sisuca.expensesmanagement.service.ExpenseService;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class HomePageController {
 
     private final CategoryService categoryService;
-    private final ExpanseService expanseService;
+    private final ExpenseService expenseService;
 
     public HomePageController(CategoryService categoryService,
-                              ExpanseService expanseService) {
+                              ExpenseService expenseService) {
         this.categoryService = categoryService;
-        this.expanseService = expanseService;
+        this.expenseService = expenseService;
     }
 
     @GetMapping("/categories")
@@ -29,15 +29,19 @@ public class HomePageController {
                 .body(categoryService.getAllCategories());
     }
 
-    @GetMapping("/expanses")
-    public ResponseEntity<Iterable<Expanse>> getAllExpanses() {
+    @GetMapping("/expenses")
+    public ResponseEntity<Iterable<Expense>> getAllExpanses() {
         return ResponseEntity.accepted()
-                .body(expanseService.getAllExpanses());
+                .body(expenseService.getAllExpenses());
     }
 
-    @GetMapping("/expansesByCategory")
-    public ResponseEntity<Map<String, List<Expanse>>> getAllExpansesByCategory() {
+    @GetMapping("/expensesC")
+    public ResponseEntity<List<Expense>> getAllByCategory(
+            @RequestParam Long id
+    ) {
+        List<Expense> expenses = expenseService.getAllExpensesByCategory(id);
+
         return ResponseEntity.accepted()
-                .body(expanseService.findAllExpanseByCategory());
+                .body(expenses);
     }
 }
